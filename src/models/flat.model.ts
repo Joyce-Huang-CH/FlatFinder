@@ -1,0 +1,11 @@
+export interface Falt {
+  ownerId: string;
+  city: string;
+  streetName: string;
+  streetNum: number;
+  areaSize: number;
+  hasAc: boolean;
+  yearBuild: number;
+  price: number;
+  dateAvailable: Date;
+}
