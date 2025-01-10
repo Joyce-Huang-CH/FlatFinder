@@ -1,4 +1,4 @@
-export interface Falt {
+export interface Flat {
   ownerId: string;
   city: string;
   streetName: string;
