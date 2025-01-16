@@ -15,4 +15,12 @@ export class AuthService {
   register(email: string, password: string){
     return createUserWithEmailAndPassword(this.auth, email, password);
   }
+
+  logout() {
+    return this.auth.signOut();
+  }
+
+  getCurrentUser() {
+    return this.auth.currentUser;
+  }
 }

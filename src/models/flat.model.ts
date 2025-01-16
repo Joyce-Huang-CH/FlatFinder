@@ -1,5 +1,6 @@
 export interface Flat {
   ownerId: string;
+  flatId: string;
   city: string;
   streetName: string;
   streetNum: number;
