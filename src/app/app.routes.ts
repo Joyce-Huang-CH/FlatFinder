@@ -7,7 +7,8 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { FlatComponent } from './pages/flat/flat.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },

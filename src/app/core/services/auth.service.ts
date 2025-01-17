@@ -1,15 +1,26 @@
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private auth: Auth) { }
+  constructor(private auth: Auth, private router: Router) { }
 
-  login(email: string, password: string){
-    return signInWithEmailAndPassword(this.auth, email, password);
+  login(auth: Auth, email: string, password: string){
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      this.router.navigate(['/home'])
+    })
+    .catch((error) => {
+      console.log(error.massage)
+      throw error;
+    })
+    // return signInWithEmailAndPassword(this.auth, email, password);
   }
 
   register(email: string, password: string){

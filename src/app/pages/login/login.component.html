@@ -1,15 +1,15 @@
 <div>
-  <form class="flex flex-col items-center m-auto pt-[33%]">
+  <form [formGroup]="loginForm" class="flex flex-col items-center m-auto pt-[10%]" (ngSubmit)="login()">
     <h1 class="text-3xl font-bold gap-2">
       login
     </h1>
     <mat-form-field class="w-2/5">
       <mat-label>Email</mat-label>
-      <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com" autocomplete="on">
-      @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+      <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com" autocomplete="on">
+      @if (loginForm.controls['email'].hasError('email') && loginForm.controls['email'].hasError('required')) {
         <mat-error>Please enter a valid email address</mat-error>
       }
-      @if (emailFormControl.hasError('required')) {
+      @if (loginForm.controls['email'].hasError('required')) {
         <mat-error>Email is <strong>required</strong></mat-error>
       }
     </mat-form-field>
@@ -27,5 +27,6 @@
         <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
+    <button mat-flat-button type="submit">Login</button>
   </form>
 </div>
