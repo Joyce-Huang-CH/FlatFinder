@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 // MatNativeDateModule,,,
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -36,6 +37,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatProgressSpinnerModule,
     // BrowserAnimationsModule,
     DragDropModule,
+    MatCheckboxModule
   ],
   exports: [
     CommonModule,
@@ -54,6 +56,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatProgressSpinnerModule,
     // BrowserAnimationsModule,
     DragDropModule,
+    MatCheckboxModule
   ],
 })
 export class MaterialModule {}

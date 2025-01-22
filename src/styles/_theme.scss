@@ -1,0 +1,12 @@
+$primary-color: #4CAF50;
+$secondary-color: #FF9800;
+
+
+:root {
+  --primary: #{$primary-color};
+  --secondary: #{$secondary-color};
+}
+
+.mat-mdc-unelevated-button:not(:disabled){
+  background-color: var(--primary);
+}
