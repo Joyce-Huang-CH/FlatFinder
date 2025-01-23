@@ -1,29 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, getDocs, updateDoc, doc, deleteDoc } from '@angular/fire/firestore';
 import { User } from '../../../models/user.model';
+import { MatTableDataSource } from '@angular/material/table';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class AdminService {
 
   constructor(private firestore: Firestore) { }
 
-  // 獲取所有用戶
-  getAllUsers() {
-    const userCollection = collection(this.firestore, 'users');
-    return getDocs(userCollection);
+  async getAllUsers() {
+    const usersRef = collection(this.firestore, 'users');
+    return getDocs(usersRef);
   }
 
-  // 授權管理員權限
-  grantAdmin(userId: string) {
-    const userDoc = doc(this.firestore, `users/${userId}`);
-    return updateDoc(userDoc, { isAdmin: true });
+  async grantAdmin(userId: string) {
+    const userRef = doc(this.firestore, 'users', userId);
+    return updateDoc(userRef, { isAdmin: true });
   }
 
-  // 刪除用戶
-  deleteUser(userId: string) {
-    const userDoc = doc(this.firestore, `users/${userId}`);
-    return deleteDoc(userDoc);
+  async deleteUser(userId: string) {
+    const userRef = doc(this.firestore, 'users', userId);
+    return deleteDoc(userRef);
   }
+
+  async getUsersDataSource(): Promise<MatTableDataSource<User>> {
+    const querySnapshot = await this.getAllUsers();
+    const users = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as User));
+    return new MatTableDataSource(users);
+  }
+  
 }

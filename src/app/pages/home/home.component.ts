@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit{
         const userProfile = await this.authService.getUserProfile(currentUser.uid);
         if (userProfile) {
           this.firstName = userProfile.firstName || 'User';
-          console.log('userProfile:', userProfile);
+          // console.log('userProfile:', userProfile);
         }
       }
     } catch (error) {

@@ -20,6 +20,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  emailTest = 'admin@testmail.com';
+  passwordTest = 'admin!';
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
