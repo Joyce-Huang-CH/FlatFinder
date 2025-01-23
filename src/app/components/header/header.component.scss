@@ -1,3 +1,13 @@
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-button {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 .logo {
   cursor: pointer;
   padding: 0 16px;
@@ -12,4 +22,11 @@
   span {
     margin: 0 4px;
   }
+}
+
+.user-menu-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }

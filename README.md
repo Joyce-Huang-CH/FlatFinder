@@ -23,8 +23,15 @@ Hosting: Firebase Hosting
 
 
 ## Login Details
+
+- Admin:
 - email: test@testmail.com
-- password: test123
+- password: test123 
+
+-User:
+- email: user@testmail.com
+- password: user123
+
 <img src="readme_img/login.png"></img>
 
 

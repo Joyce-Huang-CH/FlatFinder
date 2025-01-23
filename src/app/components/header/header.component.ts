@@ -32,6 +32,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/admin']);
   }
 
+  goToAddFlat() {
+    this.router.navigate(['/add-flat']);
+  }
+
   async ngOnInit() {
     try {
       const currentUser = await this.authService.getCurrentUser();
