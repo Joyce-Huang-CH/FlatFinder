@@ -52,7 +52,7 @@ export class LoginComponent {
     }
 
     try {
-      await this.authService.login(email, password);  // 移除結果檢查
+      await this.authService.login(email, password);
       this.snackBar.open('login success', 'Close', {
         duration: 3000,
         horizontalPosition: 'center',

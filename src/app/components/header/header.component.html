@@ -1,1 +1,28 @@
-<p>header works!</p>
+<mat-toolbar color="primary">
+  <span class="logo" routerLink="/">Flat Finder</span>
+  
+  <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu-button">
+    <mat-icon>account_circle</mat-icon>
+    <span>{{ firstName || 'Guest' }}</span>
+    <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+  
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item (click)="goToProfile()">
+      <mat-icon>person</mat-icon>
+      <span>Profile</span>
+    </button>
+    <ng-container *ngIf="isAdmin">
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="goToAdmin()">
+        <mat-icon>admin_panel_settings</mat-icon>
+        <span>Admin Page</span>
+      </button>
+    </ng-container>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

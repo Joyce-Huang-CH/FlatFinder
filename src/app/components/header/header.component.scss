@@ -1,0 +1,15 @@
+.logo {
+  cursor: pointer;
+  padding: 0 16px;
+  font-size: 20px;
+}
+
+.user-menu-button {
+  mat-icon {
+    margin-right: 8px;
+  }
+  
+  span {
+    margin: 0 4px;
+  }
+}

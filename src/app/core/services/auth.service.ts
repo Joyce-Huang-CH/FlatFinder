@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Auth, User, signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth, onAuthStateChanged } from '@angular/fire/auth';
+import { Auth, User, signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { collection, addDoc, Firestore, doc, getDoc, setDoc, serverTimestamp } from '@angular/fire/firestore';
-
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private userSubject = new BehaviorSubject<User | null>(null);
+  user = this.userSubject.asObservable();
 
-  constructor(private auth: Auth, private router: Router, private firestore: Firestore) { }
+  constructor(private auth: Auth, private router: Router, private firestore: Firestore) {
+    onAuthStateChanged(this.auth, (user) => {
+      this.userSubject.next(user);
+    });
+  }
 
   async login(email: string, password: string): Promise<any> {
     try {
@@ -43,8 +49,13 @@ export class AuthService {
     }
   }
 
-  logout() {
-    return this.auth.signOut();
+  async logout() {
+    try {
+      await signOut(this.auth);
+    } catch (error) {
+      console.error('Logout error:', error);
+      throw error;
+    }
   }
 
   async getCurrentUser(): Promise<User | null> {

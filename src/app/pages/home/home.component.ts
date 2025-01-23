@@ -1,30 +1,23 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../material/material.module';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { HeaderComponent } from '../../components/header/header.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, HeaderComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit{
 
-  // isLoggedIn = signal(false);
   firstName: string = "";
 
   constructor( private authService: AuthService ){}
 
-  startSearch() {
-
-  }
-
-  addListing() {
-
-  }
   async ngOnInit() {
     try {
       const currentUser = await this.authService.getCurrentUser();
