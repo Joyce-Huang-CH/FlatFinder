@@ -3,65 +3,70 @@
   <div class="table-header">
     <mat-form-field>
       <mat-label>search</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="search keyword" #input>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="search keyword"
+        #input
+      />
     </mat-form-field>
   </div>
 
   <mat-table [dataSource]="dataSource" matSort>
-    <!-- Email Column -->
     <ng-container matColumnDef="email">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-      <mat-cell *matCellDef="let user">{{user.email}}</mat-cell>
+      <mat-cell *matCellDef="let user">{{ user.email }}</mat-cell>
     </ng-container>
 
-    <!-- First Name Column -->
     <ng-container matColumnDef="firstName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Frist Name</mat-header-cell>
-      <mat-cell *matCellDef="let user">{{user.firstName}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Frist Name</mat-header-cell
+      >
+      <mat-cell *matCellDef="let user">{{ user.firstName }}</mat-cell>
     </ng-container>
 
-    <!-- Last Name Column -->
     <ng-container matColumnDef="lastName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Lasr Name</mat-header-cell>
-      <mat-cell *matCellDef="let user">{{user.lastName}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Lasr Name</mat-header-cell
+      >
+      <mat-cell *matCellDef="let user">{{ user.lastName }}</mat-cell>
     </ng-container>
 
-    <!-- Admin Column -->
     <ng-container matColumnDef="isAdmin">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Admin</mat-header-cell>
       <mat-cell *matCellDef="let user">
         <mat-icon [color]="user.isAdmin ? 'primary' : ''">
-          {{user.isAdmin ? 'check_circle' : 'cancel'}}
+          {{ user.isAdmin ? "check_circle" : "cancel" }}
         </mat-icon>
       </mat-cell>
     </ng-container>
 
-    <!-- Actions Column -->
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>tools</mat-header-cell>
       <mat-cell *matCellDef="let user">
-        <button mat-button color="primary" 
-                (click)="makeAdmin(user.id)"
-                [disabled]="user.isAdmin">
+        <button
+          mat-button
+          color="primary"
+          (click)="makeAdmin(user.id)"
+          [disabled]="user.isAdmin"
+        >
           grant admin
         </button>
-        <button mat-button color="warn" 
-                (click)="removeUser(user.id)">
+        <button mat-button color="warn" (click)="removeUser(user.id)">
           delete
         </button>
       </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-    <!-- Row shown when there is no matching data. -->
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="5">No data found for "{{input.value}}"</td>
+      <td class="mat-cell" colspan="5">
+        No data found for "{{ input.value }}"
+      </td>
     </tr>
   </mat-table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
-                 aria-label="select page">
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="select page">
   </mat-paginator>
 </div>
