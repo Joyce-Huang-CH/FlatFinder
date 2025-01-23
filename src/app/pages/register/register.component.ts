@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -14,37 +15,58 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+  EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   registerForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern(this.EMAIL_PATTERN)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
     isAdmin: new FormControl(false)
   });
 
   hide = signal(true);
+  isLoading = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {}
 
-  // clickEvent(event: MouseEvent) {
-  //   this.hide.set(!this.hide());
-  //   event.stopPropagation();
-  // }
+  clickEvent(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.hide.set(!this.hide());
+  }
 
-  register() {
+  async register() {
+    if (this.registerForm.invalid) return;
+
     const email = this.registerForm.get('email')?.value;
     const password = this.registerForm.get('password')?.value;
     const firstName = this.registerForm.get('firstName')?.value;
     const lastName = this.registerForm.get('lastName')?.value;
-    const isAdmin = this.registerForm.get('isAdmin')?.value;
 
-    if (email && password && firstName && lastName) {
-      this.authService.register(email, password, firstName, lastName);
-      alert('Registration complete!');
+    if (!email || !password || !firstName || !lastName) return;
+    
+    try {
+      this.isLoading = true;
+      await this.authService.register(email, password, firstName, lastName);
+      this.snackBar.open('Registration complete. Redirecting to login...', 'Close', {
+        duration: 1500,
+        horizontalPosition: 'center',
+        verticalPosition: 'top'
+      });
       this.registerForm.reset();
-      this.router.navigate(['/login']);
-    } else {
-      alert(`Registration false`);
+      await this.router.navigate(['/login']);
+    } catch (error) {
+      console.error('Registration error:', error);
+      this.snackBar.open(
+        error instanceof Error ? error.message : 'Registration failed. Please try again later.',
+        'Close',
+        {
+          duration: 5000,
+          panelClass: ['error-snackbar']
+        }
+      );
+    } finally {
+      this.isLoading = false;
     }
   }
 }

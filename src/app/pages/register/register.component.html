@@ -6,7 +6,10 @@
     <mat-form-field class="w-2/5">
       <mat-label>Email</mat-label>
       <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com" autocomplete="on">
-      @if (registerForm.controls['email'].hasError('email') && registerForm.controls['email'].hasError('required')) {
+      @if (registerForm.controls['email'].hasError('email')) {
+        <mat-error>Please enter a valid email address</mat-error>
+      }
+      @if (registerForm.controls['email'].hasError('pattern')) {
         <mat-error>Please enter a valid email address</mat-error>
       }
       @if (registerForm.controls['email'].hasError('required')) {
@@ -17,7 +20,7 @@
     <mat-form-field class="w-2/5">
       <mat-label>Password</mat-label>
       <input matInput formControlName="password" [type]="hide() ? 'password' : 'text'" autocomplete="on"/>
-      <!-- <button
+      <button
         mat-icon-button
         matSuffix
         [attr.aria-label]="'Hide password'"
@@ -25,9 +28,9 @@
         (click)="clickEvent($event)"
         >
         <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button> -->
-      @if (registerForm.controls['password'].hasError('password') && registerForm.controls['password'].hasError('required')) {
-        <mat-error> Password should be at least 5 characters</mat-error>
+      </button>
+      @if (registerForm.controls['password'].hasError('minlength')) {
+        <mat-error> Password should be at least 6 characters</mat-error>
       }
       @if (registerForm.controls['password'].hasError('required')) {
         <mat-error>Password is <strong>required</strong></mat-error>
@@ -37,7 +40,7 @@
     <mat-form-field class="w-2/5">
       <mat-label>First Name</mat-label>
       <input matInput formControlName="firstName" autocomplete="on">
-      @if (registerForm.controls['email'].hasError('required')) {
+      @if (registerForm.controls['firstName'].hasError('required')) {
         <mat-error>First name is <strong>required</strong></mat-error>
       }
     </mat-form-field>
@@ -56,7 +59,7 @@
 
     <div class="flex gap-2">
       <button mat-stroked-button type="button" routerLink="/login">Back to Login</button>
-      <button mat-flat-button type="submit" color="primary">Register</button>
+      <button mat-flat-button type="submit" color="primary" [disabled]="registerForm.invalid">Register</button>
     </div>
   </form>
 </div>

@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -26,22 +27,49 @@ export class LoginComponent {
 
   hide = signal(true);
   clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
+    event.preventDefault();
     event.stopPropagation();
+    this.hide.set(!this.hide());
   }
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
-  login() {
+  async login() {
     const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
 
-    if (email && password) {
-      this.authService.login(email, password);
+    if (!email || !password || this.loginForm.invalid) {
+      this.snackBar.open('email or password error', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+      return;
+    }
+
+    try {
+      await this.authService.login(email, password);  // 移除結果檢查
+      this.snackBar.open('login success', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+      this.router.navigate(['/home']);
+    } catch (error: any) {
+      console.error('Login error:', error);
+      this.snackBar.open('email or password error', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
     }
   }
 
-  goRegister(){
+  goRegister() {
     this.router.navigate(['/register']);
   }
 }
