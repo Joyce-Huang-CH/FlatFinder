@@ -1,1 +1,21 @@
-<p>home works!</p>
+<div class="hero-banner">
+  <h1>Find Your Perfect Home</h1>
+  <p>Search, filter, and list your own properties with ease.</p>
+  <button mat-raised-button color="primary" (click)="startSearch()">Start Searching</button>
+</div>
+
+<!-- <div class="property-list" *ngIf="properties.length > 0">
+  <h2>Latest Listings</h2>
+  <div class="property-card" *ngFor="let property of properties">
+    <img [src]="property.imageUrl" alt="Property Image" />
+    <h3>{{ property.title }}</h3>
+    <p>{{ property.location }}</p>
+    <button mat-button (click)="viewProperty(property.id)">View Details</button>
+  </div>
+</div> -->
+
+<div *ngIf="isLoggedIn()">
+  <h2>Welcome, {{ firstName }}</h2>
+  <button mat-raised-button color="accent" (click)="addListing()">Add New Listing</button>
+</div>
+

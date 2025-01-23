@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth } from '@angular/fire/auth';
+import { Auth, User, signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth, onAuthStateChanged } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { collection, addDoc, Firestore } from '@angular/fire/firestore';
+import { collection, addDoc, Firestore, doc, getDoc } from '@angular/fire/firestore';
 
 
 @Injectable({
@@ -12,7 +12,6 @@ export class AuthService {
   constructor(private auth: Auth, private router: Router, private firestore: Firestore) { }
 
   login(email: string, password: string){
-    console.log(Auth);
     signInWithEmailAndPassword(this.auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
@@ -48,8 +47,26 @@ export class AuthService {
     return this.auth.signOut();
   }
 
+  // async getCurrentUser(): Promise<User | null> {
+  //   return new Promise((resolve) => {
+  //     onAuthStateChanged(this.auth, (user) => {
+  //       resolve(user);
+  //     });
+  //   });
+  // }
+
   getCurrentUser() {
-    return this.auth.currentUser;
+    const auth = getAuth();
+    const user = auth.currentUser;
+    console.log(user)
+  }
+
+  async getUserProfile(uid: string): Promise<any> {
+    const userDocRef = doc(this.firestore, `users/${uid}`);
+    console.log(userDocRef)
+    const userDocSnap = await getDoc(userDocRef);
+    console.log(userDocSnap)
+    return userDocSnap.exists() ? userDocSnap.data() : null;
   }
 
   isAdmin() {

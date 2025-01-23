@@ -25,6 +25,7 @@ Hosting: Firebase Hosting
 ## Login Details
 - email: test@testmail.com
 - password: test123
+<img src="readme_img/login.png"></img>
 
 
 ## Register
@@ -36,7 +37,10 @@ Hosting: Firebase Hosting
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. Clone the repository `git clone https://github.com/Joyce-Huang-CH/FlatFinder.git`
+2. `cd flatfinder` 
+3. Install dependencies: `npm install`
+4. Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 

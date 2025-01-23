@@ -42,7 +42,7 @@ export class RegisterComponent {
       this.authService.register(email, password, firstName, lastName);
       alert('Registration complete!');
       this.registerForm.reset();
-      // this.router.navigate(['/login']);
+      this.router.navigate(['/login']);
     } else {
       alert(`Registration false`);
     }

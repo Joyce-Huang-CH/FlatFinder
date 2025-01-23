@@ -1,0 +1,30 @@
+.hero-banner {
+  text-align: center;
+  padding: 40px;
+  background-image: url('/src/assets/hero-bg.jpg') no-repeat center center/cover;
+  color: white;
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  button {
+    margin-top: 20px;
+  }
+}
+
+.property-list {
+  padding: 20px;
+
+  .property-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+  }
+}
