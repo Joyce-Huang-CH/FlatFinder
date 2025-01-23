@@ -23,15 +23,15 @@ Hosting: Firebase Hosting
 
 
 ## Login Details
-email: test@testmail.com
-password: test123
+- email: test@testmail.com
+- password: test123
 
 
 ## Register
-email: required
-password: required, minimum length is 5
-firstName: required
-lastName: required
+- email: required
+- password: required, minimum length is 5
+- firstName: required
+- lastName: required
 
 
 ## Development server
