@@ -2,6 +2,38 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.11.
 
+FlatFinder is a web application designed to connect landlords and renters, allowing them to list, search, and manage rental properties. Built with Angular, this project provides an intuitive and responsive interface for users to find and manage flats efficiently.
+
+
+## Features
+
+- User Authentication: Register, log in, and manage user profiles.
+- Property Listings: Landlords can add, edit, and delete their rental listings.
+- Search & Filter: Renters can browse flats with filtering options (city, price, size, etc.).
+- Favorites: Users can mark/unmark flats as favorites for easy access.
+- Messaging System: Renters can send messages to landlords regarding a specific listing.
+- Admin Panel: Admin users can manage all users, edit profiles, and grant admin permissions.
+
+
+## Technologies
+
+Frontend: Angular, TypeScript, HTML, CSS
+Backend: Firebase (Firestore for database, Firebase Functions for API)
+Hosting: Firebase Hosting
+
+
+## Login Details
+email: test@testmail.com
+password: test123
+
+
+## Register
+email: required
+password: required, minimum length is 5
+firstName: required
+lastName: required
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
