@@ -37,7 +37,7 @@ Hosting: Firebase Hosting
 
 ## Register
 - email: required
-- password: required, minimum length is 5
+- password: required, minimum length is 6
 - firstName: required
 - lastName: required
 
