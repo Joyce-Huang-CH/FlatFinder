@@ -73,7 +73,17 @@ export class AuthService {
     return docSnap.exists() ? docSnap.data() : null;
   }
 
-  isAdmin() {
-    // return this.auth.isAdmin;
+  
+  async updateUserProfile(uid: string, profileData: any) {
+    try {
+      const userRef = doc(this.firestore, 'users', uid);
+      await setDoc(userRef, {
+        ...profileData,
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+    } catch (error) {
+      console.error('Update profile error:', error);
+      throw error;
+    }
   }
 }

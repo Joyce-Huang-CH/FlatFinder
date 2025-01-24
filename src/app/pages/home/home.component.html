@@ -1,5 +1,25 @@
-<div>
-  <app-header></app-header>
-  <h2>Welcome, {{ firstName }}</h2>
+<app-header></app-header>
+<!-- <h2>Welcome, {{ firstName }}</h2> -->
+<div class="flats-container">
+  <mat-grid-list cols="3" rowHeight="400px" gutterSize="10px">
+    @for (flat of flats; track flat.flatId) {
+      <mat-grid-tile>
+        <mat-card class="flat-card">
+          <mat-card-header>
+            <mat-card-title>{{ flat.city }}</mat-card-title>
+            <mat-card-subtitle>{{ flat.streetName }} {{ flat.streetNum }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="flat-details">
+              <p class="detail-item"><span class="label">Area:</span> {{ flat.areaSize }} m²</p>
+              <p class="detail-item"><span class="label">Price:</span> ${{ flat.price }}/month</p>
+              <p class="detail-item"><span class="label">Available:</span> {{ flat.dateAvailable | date }}</p>
+              <p class="description">{{ flat.description }}</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    }
+  </mat-grid-list>
 </div>
 

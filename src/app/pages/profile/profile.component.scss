@@ -1,0 +1,59 @@
+.profile-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+
+  h2, h3 {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.profile-form {
+  margin-bottom: 3rem;
+  
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+.my-flats-section {
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .no-flats {
+    text-align: center;
+    color: #666;
+    padding: 2rem;
+  }
+}
+
+.flat-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.flat-item {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  mat-card-content {
+    p {
+      margin: 0.5rem 0;
+    }
+  }
+}
+
+mat-progress-spinner {
+  margin: 2rem auto;
+}

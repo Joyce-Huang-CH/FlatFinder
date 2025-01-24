@@ -51,4 +51,33 @@ export class FlatService {
     const flatRef = doc(this.firestore, 'flats', flatId);
     return updateDoc(flatRef, data);
   }
+
+  async getUserFlats(userId: string): Promise<Flat[]> {
+    const flatsRef = collection(this.firestore, 'flats');
+    const querySnapshot = await getDocs(flatsRef);
+    return querySnapshot.docs
+      .map(doc => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          ...data,
+          dateAvailable: data['dateAvailable']?.toDate()
+        } as unknown as Flat;
+      })
+      .filter(flat => flat.ownerId === userId);
+  }
+
+  async getAllFlats(): Promise<Flat[]> {
+    const flatsRef = collection(this.firestore, 'flats');
+    const querySnapshot = await getDocs(flatsRef);
+    return querySnapshot.docs
+      .map(doc => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          ...data,
+          dateAvailable: data['dateAvailable']?.toDate()
+        } as unknown as Flat;
+      });
+  }
 }
