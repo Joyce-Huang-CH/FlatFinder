@@ -28,7 +28,7 @@ Hosting: Firebase Hosting
 - email: test@testmail.com
 - password: test123 
 
--User:
+- User:
 - email: user@testmail.com
 - password: user123
 
